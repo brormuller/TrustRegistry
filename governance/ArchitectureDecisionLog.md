@@ -95,8 +95,8 @@ Merging them into one product or one repository would:
 
 ### Decision
 
-- **TrustRegistry** is the regulated trust platform. This repository (`C:\GitHub\TrustRegistry`) is its home.
-- **AuditorsVault** remains the PostgreSQL database history tool in its own repository.
+- **TrustRegistry** is the regulated trust platform. This repository is its home—a **peer** top-level GitHub repository (not nested under AuditorsVault).
+- **AuditorsVault** remains the PostgreSQL database history tool in its own repository ([AuditorsVault/site](https://github.com/AuditorsVault/site)).
 - TrustRegistry **may depend on** AuditorsVault for operational immutability (FP-060)—e.g. audit tables, change history—but AuditorsVault is **not** the TrustRegistry product and does not implement disclosure, packages, or trust assertions.
 - Integration boundary deferred to architecture phase (Q-080).
 

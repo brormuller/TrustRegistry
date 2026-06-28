@@ -10,8 +10,10 @@ TrustRegistry is a regulated-industry trust platform that enables organisations 
 
 | Product | Repository | Focus |
 |---------|------------|-------|
-| **TrustRegistry** | This repo | Inter-org trust, evidence packages, trust assertions |
+| **TrustRegistry** | This repo ([github.com/brormuller/TrustRegistry](https://github.com/brormuller/TrustRegistry)) | Inter-org trust, evidence packages, trust assertions |
 | **AuditorsVault** | [AuditorsVault/site](https://github.com/AuditorsVault/site) | PostgreSQL change capture and database history |
+
+TrustRegistry and AuditorsVault are **peer products**—separate top-level GitHub repositories, not nested under one another.
 
 ## How to read this repository
 
@@ -61,7 +63,8 @@ Only **Agreed** documents gate implementation work.
 
 ### Start here
 
-1. [governance/PlatformPrinciples.md](governance/PlatformPrinciples.md) — constitutional document
-2. [governance/ProductVision.md](governance/ProductVision.md) — vision and beachhead
-3. [governance/Questions.md](governance/Questions.md) — open uncertainties
-4. [governance/Risks.md](governance/Risks.md) — known risks
+1. [docs/TrustRegistryFoundation.md](docs/TrustRegistryFoundation.md) — architecture foundation and plan
+2. [governance/PlatformPrinciples.md](governance/PlatformPrinciples.md) — constitutional document
+3. [governance/ProductVision.md](governance/ProductVision.md) — vision and beachhead
+4. [governance/Questions.md](governance/Questions.md) — open uncertainties
+5. [governance/Risks.md](governance/Risks.md) — known risks

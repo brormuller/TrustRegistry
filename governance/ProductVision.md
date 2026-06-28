@@ -39,7 +39,7 @@ TrustRegistry will **almost certainly use** AuditorsVault (or similar mechanisms
 |---|---------------|---------------|
 | **Buyer** | Regulated org compliance / risk | Teams needing DB change history |
 | **Core object** | Evidence package | Row-level database history |
-| **Repo** | This repository | `AuditorsVault/site` on GitHub |
+| **Repo** | This repository (peer, top-level) | [AuditorsVault/site](https://github.com/AuditorsVault/site) |
 
 ---
 
