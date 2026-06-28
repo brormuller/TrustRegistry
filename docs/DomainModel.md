@@ -6,9 +6,11 @@
 
 Conceptual domain model for TrustRegistry. This document defines **concepts and relationships**—not database schemas, APIs, or implementation details.
 
-Split into EntityModel, EvidenceModel, TrustModel, and ApprovalModel when this document stabilises. **Entity detail:** [EntityModel.md](EntityModel.md) (EM-010+).
+Split into EntityModel, EvidenceModel, TrustModel, and ApprovalModel when this document stabilises. 
 
-**Scope boundary:** PostgreSQL row-level change history is **AuditorsVault** domain (ADR-020), not modeled here.
+**Entity detail:** [EntityModel.md](EntityModel.md) (EM-010+).
+
+**Scope boundary (AuditorsVault):** PostgreSQL row-level change history is **AuditorsVault** domain (ADR-020), not modeled here.
 
 ---
 
@@ -34,6 +36,8 @@ flowchart LR
   Package -->|optionally| Anchor
   Assertion -->|about| Package
 ```
+
+
 
 ---
 
@@ -246,25 +250,29 @@ Pluggable mechanism for external anchoring—not part of core domain identity.
 
 ## Boundaries and deferrals
 
-| Concept | v1 | Defer |
-|---------|----|----|
-| Subject Entity | person, organisation (v1) | Other types via metamodel; relationships Q-101 |
-| Trust Assertion types | Minimum structure (Q-060) | Full taxonomy |
-| Approval workflows | Not modelled | ApprovalModel.md when needed |
-| In-platform vs export review | Open (Q-030) | — |
-| DB change history | AuditorsVault (ADR-020) | Not TrustRegistry domain |
+
+| Concept                      | v1                        | Defer                                          |
+| ---------------------------- | ------------------------- | ---------------------------------------------- |
+| Subject Entity               | person, organisation (v1) | Other types via metamodel; relationships Q-101 |
+| Trust Assertion types        | Minimum structure (Q-060) | Full taxonomy                                  |
+| Approval workflows           | Not modelled              | ApprovalModel.md when needed                   |
+| In-platform vs export review | Open (Q-030)              | —                                              |
+| DB change history            | AuditorsVault (ADR-020)   | Not TrustRegistry domain                       |
+
 
 ---
 
 ## Principle traceability
 
-| Concept | Principles |
-|---------|------------|
-| Evidence Package | ADR-010, FP-040, FP-080 |
-| Disclosure | FP-030, FP-070 |
-| Trust Assertion | FP-010, FP-050 |
-| Integrity Proof / Anchor | FP-020 |
-| Version history | FP-060 |
+
+| Concept                  | Principles              |
+| ------------------------ | ----------------------- |
+| Evidence Package         | ADR-010, FP-040, FP-080 |
+| Disclosure               | FP-030, FP-070          |
+| Trust Assertion          | FP-010, FP-050          |
+| Integrity Proof / Anchor | FP-020                  |
+| Version history          | FP-060                  |
+
 
 ---
 
@@ -274,3 +282,4 @@ Pluggable mechanism for external anchoring—not part of core domain identity.
 - [EntityModel.md](EntityModel.md)
 - [ArchitectureDecisionLog.md](../governance/ArchitectureDecisionLog.md) — ADR-010, ADR-020, ADR-040
 - [Questions.md](../governance/Questions.md) — Q-020, Q-100–Q-103
+
