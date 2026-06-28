@@ -15,6 +15,7 @@ Record of significant architecture and design decisions. Each ADR is immutable o
 | ADR-010 | Evidence package as unit of disclosure and review | Accepted | 2026-06-28 |
 | ADR-020 | TrustRegistry and AuditorsVault as separate products | Accepted | 2026-06-28 |
 | ADR-030 | Multi-client architecture — API-first, thin clients | Accepted | 2026-06-28 |
+| ADR-040 | Entity type metamodel — schema-driven extensibility | Accepted | 2026-06-28 |
 
 ---
 
@@ -184,6 +185,69 @@ NFR-040 already requires integrity proofs verifiable independently of any UI. AD
 - [Requirements.md](../docs/Requirements.md) — NFR-100
 - [Questions.md](Questions.md) — Q-090–Q-093
 - [Risks.md](Risks.md) — RISK-090
+
+---
+
+## ADR-040 — Entity type metamodel (schema-driven extensibility)
+
+**Status:** Accepted  
+**Date:** 2026-06-28  
+**Deciders:** Product architecture
+
+### Context
+
+TrustRegistry's first beachhead is onboarding and approval of **individuals and companies**, but the product vision includes **many entity kinds**—properties, condominiums, diamonds, artwork, and types not yet defined. Each type may have:
+
+- Different **attributes** (title deed vs passport vs lab certificate)
+- Different **evidence requirements** (KYC vs provenance vs survey)
+- Different **review workflows** over time
+
+A naive model—a single `Entity` table with optional columns, or separate tables per type—either breaks at the second asset class or forces core rewrites. Q-020 identified entity definition as the highest-leverage modeling decision.
+
+**Customer relationship:** One custodian tenant enables and manages **many entity types** and **many instances** per type.
+
+### Decision
+
+Adopt an **entity type metamodel**:
+
+1. **Entity Type** — definitional: identifier, attribute schema, optional evidence requirement profile, version.
+2. **Entity Instance** — a specific subject classified by one type; typed attributes validated against schema.
+3. **Evidence Package** — still the unit of disclosure (ADR-010); subject is an **entity instance**, not a type.
+4. **Tenant entity type enablement** — custodians use a subset of types from a platform catalogue (tenant-defined types: Q-100).
+5. **Type-specific behaviour** is expressed through **schemas and profiles**, not through forked application code paths.
+
+**v1 implements** types and instances for the beachhead (e.g. person, organisation). **v1 does not implement** every future type—only the metamodel and beachhead types (FP-090).
+
+Entity relationships (condominium → units) are recognised but deferred (Q-101, EM-060).
+
+### Consequences
+
+**Positive:**
+
+- Property, artwork, diamond types add as **configuration + templates**, not platform rewrites
+- One custodian → many types is explicit (EM-040)
+- API can stabilise on `/entities/{id}` and `/entity-types/{id}` regardless of type
+- Aligns with export/portability (FP-080)—instance + type schema exportable with package
+
+**Negative / trade-offs:**
+
+- Metamodel adds design complexity up front (RISK-100)
+- Schema validation, type versioning, and profile governance must be designed in Architecture
+- Reviewers need UX that renders unknown types sensibly (schema-driven UI—Phase 1)
+
+**Open:**
+
+- Q-100: platform-only vs tenant-custom types
+- Q-101: entity relationship model
+- Q-102: evidence profiles per type and assurance purpose
+- Q-103: type catalogue governance and breaking changes
+
+### Related
+
+- [EntityModel.md](../docs/EntityModel.md)
+- [DomainModel.md](../docs/DomainModel.md) — DM-010
+- [Questions.md](Questions.md) — Q-020, Q-100–Q-103
+- [Risks.md](Risks.md) — RISK-100
 
 ---
 

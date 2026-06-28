@@ -136,6 +136,20 @@ This register tracks commercial, legal, technical, and product risks. Each risk 
 
 ---
 
+### RISK-100 — Entity metamodel complexity and schema chaos
+
+**Category:** Product / Technical  
+**Description:** Extensible entity types lead to over-complex metamodel, ungoverned tenant custom types, or schema changes that break published packages and reviewer UX.
+
+**Likelihood:** Medium  
+**Impact:** High  
+**Mitigation:** ADR-040; platform catalogue first (Q-100); type versioning rules (Q-103); defer relationships (Q-101); FP-090 on v1 type count.
+
+**Status:** Active  
+**Related:** Q-100–Q-103, [EntityModel.md](../docs/EntityModel.md)
+
+---
+
 ## Closed risks
 
 _None yet._

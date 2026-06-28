@@ -300,6 +300,8 @@ flowchart TD
 | Wave 3 — ADR-010 | Accepted |
 | Wave 3 — ADR-020 (AuditorsVault separation) | Accepted |
 | Wave 3 — ADR-030 (multi-client architecture) | Accepted |
-| Wave 4 — Requirements | Draft (includes NFR-100) |
+| Wave 3 — ADR-040 (entity type metamodel) | Accepted |
+| Wave 4 — Requirements | Draft (includes NFR-100, NFR-110) |
+| Entity model split | [EntityModel.md](EntityModel.md) Draft |
 
 No [src/](../src/) code, no API specs, no wireframes until Problem + Domain Model reach **Agreed**.

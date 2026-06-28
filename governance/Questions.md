@@ -27,12 +27,14 @@ This register records uncertainties we refuse to assume. When a question is answ
 
 **Question:** What is the minimum **Entity** definition for v1?
 
-**Context:** "Entity" could mean legal entity, organisational unit, control, supplier, product, or person. This is the highest-leverage modeling decision.
+**Context:** Resolved at metamodel level by **ADR-040**: entity type + entity instance. v1 must still confirm which **types** and **attributes** ship for beachhead onboarding (person, organisation).
 
 **Impact:** Domain model, evidence package structure, assertions scope.
 
-**Status:** Open  
-**Working hypothesis:** v1 Entity = a **Subject of Assurance**—the organisation, legal entity, or third party whose compliance or trustworthiness the evidence package addresses. See [docs/DomainModel.md](../docs/DomainModel.md) DM-010.
+**Status:** Partially resolved (metamodel); open for v1 type catalogue  
+**Answer (metamodel):** Entity **instance** with typed attributes per **entity type**. See [EntityModel.md](../docs/EntityModel.md).  
+**Resolved by:** ADR-040  
+**v1 hypothesis:** `person` and `organisation` types only.
 
 ---
 
@@ -163,6 +165,65 @@ This register records uncertainties we refuse to assume. When a question is answ
 
 **Status:** Open  
 **Related:** ADR-030, Phase 1 Security (push notifications, secure storage)
+
+---
+
+### Q-100 — Entity type catalogue governance
+
+**Question:** Are entity types **platform-defined only**, or can tenants define **custom types**?
+
+**Context:** ADR-040 assumes a type catalogue. Unrestricted tenant-defined types risk schema chaos (RISK-100); platform-only types may limit vertical expansion.
+
+**Impact:** EntityModel EM-040, admin UX, commercial packaging.
+
+**Status:** Open  
+**Hypothesis:** Platform catalogue for v1; tenant enablement of subset; custom types deferred.
+
+**Related:** ADR-040, Q-101
+
+---
+
+### Q-101 — Entity relationships
+
+**Question:** How are relationships modelled (e.g. condominium → units, company → directors, artwork → owner)?
+
+**Context:** EM-060 defers detail. Relationships may affect package scope, disclosure, and reviewer context.
+
+**Impact:** EntityModel, DomainModel, API design.
+
+**Status:** Open  
+**Hypothesis:** v1 single primary instance per package; relationships as phase 2+ linked instances.
+
+**Related:** ADR-040
+
+---
+
+### Q-102 — Evidence profiles per type and purpose
+
+**Question:** Are evidence requirement profiles keyed by **entity type alone**, or by **type + assurance purpose** (onboarding, periodic review, transaction)?
+
+**Context:** A diamond may need provenance evidence for sale and different evidence for insurance. EM-030.
+
+**Impact:** EntityModel, package assembly UX, FR-013.
+
+**Status:** Open  
+**Hypothesis:** type + purpose for flexibility; v1 may use type-only with single "onboarding" purpose.
+
+**Related:** ADR-040, beachhead workflows
+
+---
+
+### Q-103 — Entity type versioning and breaking changes
+
+**Question:** When an entity type's attribute schema changes, how are existing instances and published packages affected?
+
+**Context:** FP-060 requires additive, non-silent change. EM-050.
+
+**Impact:** Architecture, migration, export compatibility.
+
+**Status:** Open
+
+**Related:** ADR-040, RISK-100
 
 ---
 

@@ -6,7 +6,7 @@
 
 Functional and non-functional requirements for TrustRegistry v1. **NFRs precede FRs**—regulated multi-tenant SaaS constraints shape what features are safe to build.
 
-**Prerequisites (Draft):** Platform Principles, Product Vision, Problem Statement, Domain Model, ADR-010, ADR-020, ADR-030.
+**Prerequisites (Draft):** Platform Principles, Product Vision, Problem Statement, Domain Model, Entity Model, ADR-010, ADR-020, ADR-030, ADR-040.
 
 ---
 
@@ -109,14 +109,56 @@ The platform shall expose capabilities through a **documented, versioned API** u
 
 ---
 
+### NFR-110 — Entity type extensibility
+
+The platform shall represent entity subjects using a **type metamodel**: entity types define attribute schemas; entity instances hold typed attribute values. Core operations (packages, disclosure, assertions) shall **not** depend on entity-type-specific server code paths.
+
+**Principle:** FP-090 (implement beachhead types only; metamodel is platform commitment)  
+**ADR:** ADR-040  
+**Questions:** Q-100–Q-103
+
+---
+
 ## Functional requirements
 
-### FR-010 — Manage Subject Entities
+### FR-010 — Manage entity instances
 
-Custodians shall create and manage Subject Entities referenced by evidence packages.
+Custodians shall create and manage **entity instances** classified by enabled **entity types**, with attributes validated against each type's schema.
 
-**Domain:** DM-010  
-**Question:** Q-020 (definition may refine)
+**Domain:** DM-010, EM-020  
+**ADR:** ADR-040  
+**v1:** person and organisation types (hypothesis)
+
+---
+
+### FR-011 — Enable entity types per tenant
+
+Custodians shall enable or disable **entity types** from the platform catalogue for their tenant (one custodian → many entity types).
+
+**Domain:** EM-040  
+**ADR:** ADR-040  
+**Question:** Q-100
+
+---
+
+### FR-012 — Manage entity type definitions (platform)
+
+The platform shall maintain **entity type** definitions including attribute schemas and versioning (platform catalogue).
+
+**Domain:** EM-010, EM-050  
+**ADR:** ADR-040  
+**Question:** Q-103  
+**Note:** v1 may ship fixed types; capability must not assume only two types in code.
+
+---
+
+### FR-013 — Evidence requirement profiles
+
+The platform shall support **evidence requirement profiles** associating entity types (and optionally assurance purposes) with expected evidence categories, guiding package assembly without implying completeness or truth (FP-010).
+
+**Domain:** EM-030  
+**Question:** Q-102  
+**v1:** Profiles for beachhead types; metamodel supports future types.
 
 ---
 
@@ -219,6 +261,8 @@ Custodians and authorised reviewers shall export package versions with integrity
 | FR-D040 | Platform arbitration of disputed assertions | Violates FP-010 |
 | FR-D050 | Embedded AuditorsVault integration | Q-080; architecture phase |
 | FR-D060 | Full mobile feature parity with web | Q-090; defer until web MVP validated |
+| FR-D070 | Tenant-defined custom entity types | Q-100; platform catalogue first |
+| FR-D080 | Entity relationship graph | Q-101; EM-060 deferred |
 
 ---
 
@@ -230,6 +274,8 @@ Custodians and authorised reviewers shall export package versions with integrity
 | NFR-040 | FP-020 | DM-080 | ADR-010 |
 | NFR-060 | FP-080 | DM-040 | ADR-010 |
 | NFR-100 | FP-050, FP-080 | — | ADR-030 |
+| NFR-110 | FP-090 | EM-010, EM-020 | ADR-040 |
+| FR-010 | — | EM-020 | ADR-040 |
 | FR-050 | FP-030 | DM-050 | ADR-010 |
 | FR-080 | FP-050 | DM-070 | — |
 | FR-090 | FP-010 | DM-070 | — |

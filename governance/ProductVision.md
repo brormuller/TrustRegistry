@@ -73,7 +73,9 @@ TrustRegistry will **almost certainly use** AuditorsVault (or similar mechanisms
 
 **Deployment model:** Multi-tenant SaaS with strict tenant isolation (FP-070).
 
-**Beachhead (hypothesis — see Q-010):** Organisations producing **assurance-style evidence packages**—for example SOC/ISO-style control evidence, or third-party risk documentation—where multiple external parties review the same material and reach independent conclusions.
+**Beachhead (hypothesis — see Q-010):** **Onboarding, evidence collection, and approval** of **individuals and companies**—with assurance-style evidence packages where external parties review and assert independently.
+
+**Entity extensibility:** v1 focuses on person and organisation types; the platform adopts a **schema-driven entity type metamodel** (ADR-040) so future types—property, condominium, diamond, artwork, etc.—add without core rewrites. See [EntityModel.md](../docs/EntityModel.md).
 
 This hypothesis must be validated before vertical-specific features are prioritised.
 
@@ -126,9 +128,10 @@ These indicate the vision is working—not vanity metrics:
 | Focused beachhead | FP-090 |
 | Export and portability | FP-080 |
 | Multi-channel (web + mobile) | ADR-030, NFR-100 |
+| Extensible entity types | ADR-040, NFR-110 |
 
 ---
 
 ## Open questions affecting vision
 
-See [Questions.md](Questions.md): Q-010 (beachhead), Q-030 (review mechanism), Q-070 (GRC positioning), Q-080 (AuditorsVault integration), Q-090–Q-093 (web/mobile scope and parity).
+See [Questions.md](Questions.md): Q-010 (beachhead), Q-030 (review mechanism), Q-070 (GRC positioning), Q-080 (AuditorsVault integration), Q-090–Q-093 (web/mobile scope), Q-100–Q-103 (entity type extensibility).

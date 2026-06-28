@@ -6,7 +6,7 @@
 
 Conceptual domain model for TrustRegistry. This document defines **concepts and relationships**—not database schemas, APIs, or implementation details.
 
-Split into EntityModel, EvidenceModel, TrustModel, and ApprovalModel when this document stabilises.
+Split into EntityModel, EvidenceModel, TrustModel, and ApprovalModel when this document stabilises. **Entity detail:** [EntityModel.md](EntityModel.md) (EM-010+).
 
 **Scope boundary:** PostgreSQL row-level change history is **AuditorsVault** domain (ADR-020), not modeled here.
 
@@ -39,22 +39,24 @@ flowchart LR
 
 ## Core concepts
 
-### DM-010 — Subject Entity
+### DM-010 — Subject Entity (instance)
 
-The **Entity** is the subject of assurance—the party or organisation the evidence package addresses.
+The **Entity** is a **subject of assurance**—a specific individual, organisation, property, asset, or other typed subject that an evidence package addresses.
 
-**Working definition (Q-020):** A named subject referenced by an evidence package. Examples:
+This concept is expanded in [EntityModel.md](EntityModel.md). At summary level:
 
-- The custodian's own organisation (self-assessment)
-- A subsidiary or business unit under group oversight
-- A third-party supplier or partner under due diligence
+- An **Entity Instance** is classified by exactly one **Entity Type** (ADR-040).
+- Types define attribute schemas and optional evidence requirement profiles; instances hold typed attribute values.
+- **v1 beachhead:** person and organisation instances (onboarding / approval).
+- **Platform lifetime:** property, condominium, diamond, artwork, and extensible future types—without changing ADR-010 package semantics.
 
-**Attributes (conceptual):** Identifier, display name, type (organisation, legal entity, third party), optional external references.
+**Working definition (Q-020 — refined by ADR-040):** Entity instance = typed subject referenced by an evidence package, owned by a custodian tenant.
 
 **Rules:**
 
-- Every evidence package has exactly one primary Entity subject.
-- Entity is not synonymous with Custodian—a custodian may hold packages about other entities.
+- Every evidence package has exactly one primary entity instance subject.
+- Entity instance is not synonymous with custodian—a custodian may hold instances and packages about third parties.
+- One custodian may enable and manage **many entity types** (EM-040).
 
 ---
 
@@ -246,7 +248,7 @@ Pluggable mechanism for external anchoring—not part of core domain identity.
 
 | Concept | v1 | Defer |
 |---------|----|----|
-| Subject Entity | Working definition above | Fine-grained controls, products, individuals |
+| Subject Entity | person, organisation (v1) | Other types via metamodel; relationships Q-101 |
 | Trust Assertion types | Minimum structure (Q-060) | Full taxonomy |
 | Approval workflows | Not modelled | ApprovalModel.md when needed |
 | In-platform vs export review | Open (Q-030) | — |
@@ -269,5 +271,6 @@ Pluggable mechanism for external anchoring—not part of core domain identity.
 ## Related documents
 
 - [Terminology.md](../governance/Terminology.md)
-- [ArchitectureDecisionLog.md](../governance/ArchitectureDecisionLog.md) — ADR-010, ADR-020
-- [Questions.md](../governance/Questions.md) — Q-020, Q-030, Q-060, Q-080
+- [EntityModel.md](EntityModel.md)
+- [ArchitectureDecisionLog.md](../governance/ArchitectureDecisionLog.md) — ADR-010, ADR-020, ADR-040
+- [Questions.md](../governance/Questions.md) — Q-020, Q-100–Q-103

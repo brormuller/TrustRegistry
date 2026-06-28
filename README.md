@@ -41,7 +41,7 @@ If you are tempted to skip ahead, check prerequisites in the governing documents
 | Area | Purpose |
 |------|---------|
 | [governance/](governance/) | Constitutional documents, ADRs, questions, risks |
-| [docs/](docs/) | Domain model, requirements, architecture (later) |
+| [docs/](docs/) | Domain model, entity model, requirements, architecture (later) |
 | [ui/](ui/) | User journeys and design (when requirements are stable) |
 | [src/](src/) | Application code (empty until agreed design) |
 

@@ -12,11 +12,25 @@ Ubiquitous language for TrustRegistry. Expand this glossary as the domain model 
 
 ### Entity
 
-A **Subject of Assurance**—the organisation, legal entity, third party, or other party whose compliance, trustworthiness, or status the evidence addresses.
+A **Subject of Assurance**—a specific subject whose compliance, trustworthiness, or status evidence addresses. Modelled as an **Entity Instance** classified by an **Entity Type** (ADR-040, [EntityModel.md](../docs/EntityModel.md)).
 
-**v1 working definition (hypothesis — Q-020 open):** The Entity is the subject of an evidence package, not necessarily the custodian who holds the evidence. Example: a supplier being assessed, a subsidiary under group audit, or the custodian's own organisation.
+**v1 beachhead:** Person and organisation instances (onboarding, evidence collection, approval).
 
-**Not in v1 scope (defer):** Product entities, individual persons as primary subjects, fine-grained control-level entities—unless beachhead validation requires them.
+**Platform lifetime:** Extensible to property, condominium, diamond, artwork, and other types—each with its own attribute schema and evidence requirement profile—not separate product forks.
+
+**Not the same as:** Custodian (the tenant organisation that may own/manage instances).
+
+---
+
+### Entity Type
+
+A **definition** of a class of entity instance: identifier, attribute schema, optional evidence requirement profile, version. See EM-010 in [EntityModel.md](../docs/EntityModel.md).
+
+---
+
+### Entity Instance
+
+A **specific subject** created under an entity type, with typed attributes validated against that type's schema. Evidence packages reference entity instances. See EM-020.
 
 ---
 
