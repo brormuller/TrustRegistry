@@ -6,7 +6,7 @@
 
 Functional and non-functional requirements for TrustRegistry v1. **NFRs precede FRs**—regulated multi-tenant SaaS constraints shape what features are safe to build.
 
-**Prerequisites (Draft):** Platform Principles, Product Vision, Problem Statement, Domain Model, ADR-010, ADR-020.
+**Prerequisites (Draft):** Platform Principles, Product Vision, Problem Statement, Domain Model, ADR-010, ADR-020, ADR-030.
 
 ---
 
@@ -90,6 +90,22 @@ If Q-040 resolves to mandatory regional residency, the architecture shall suppor
 
 **Question:** Q-040  
 **Risk:** RISK-050
+
+---
+
+### NFR-100 — Multi-client support
+
+The platform shall expose capabilities through a **documented, versioned API** usable by multiple client applications (web, mobile, and future channels) **without client-specific server behaviour** for domain operations.
+
+**Principle:** FP-010, FP-050, FP-080  
+**ADR:** ADR-030  
+**Questions:** Q-090–Q-093
+
+**Implications:**
+
+- Package, disclosure, assertion, and integrity operations are API-accessible.
+- Authorisation and audit apply uniformly regardless of client.
+- Client technology (native, hybrid, responsive web) is an implementation choice—not a requirement fork.
 
 ---
 
@@ -202,6 +218,7 @@ Custodians and authorised reviewers shall export package versions with integrity
 | FR-D030 | Subset disclosure (partial package) | ADR-010 consequence; defer complexity |
 | FR-D040 | Platform arbitration of disputed assertions | Violates FP-010 |
 | FR-D050 | Embedded AuditorsVault integration | Q-080; architecture phase |
+| FR-D060 | Full mobile feature parity with web | Q-090; defer until web MVP validated |
 
 ---
 
@@ -212,6 +229,7 @@ Custodians and authorised reviewers shall export package versions with integrity
 | NFR-010 | FP-070 | DM-020 | ADR-010 |
 | NFR-040 | FP-020 | DM-080 | ADR-010 |
 | NFR-060 | FP-080 | DM-040 | ADR-010 |
+| NFR-100 | FP-050, FP-080 | — | ADR-030 |
 | FR-050 | FP-030 | DM-050 | ADR-010 |
 | FR-080 | FP-050 | DM-070 | — |
 | FR-090 | FP-010 | DM-070 | — |

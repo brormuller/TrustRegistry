@@ -18,7 +18,27 @@ You are building **digital trust infrastructure**, not a blockchain product. The
 - **Independent multi-party review** — same evidence package, different conclusions; this is a genuine differentiator vs. typical GRC tools that optimize for *one* org's compliance dashboard.
 - **Blockchain as interchangeable publishing** — correct architectural instinct; immutability and provable history are the requirements; chain is one implementation option.
 
-Your chosen v1 context (**regulated industry buyer**, **multi-tenant SaaS**) raises the bar on **tenant isolation, data residency, liability boundaries, and export/portability**—these must appear in Platform Principles and Risks early, not as late Architecture surprises.
+Your chosen v1 context (**regulated industry buyer**, **multi-tenant SaaS**, **web and mobile clients**) raises the bar on **tenant isolation, data residency, liability boundaries, export/portability, and API-first design**—these must appear in Platform Principles and Risks early, not as late Architecture surprises.
+
+---
+
+## Multi-channel provision (web and mobile)
+
+TrustRegistry is a **multi-channel product**. Web and mobile are peer clients; the platform API is canonical (ADR-030).
+
+**Provisioned now (documentation only):**
+
+| Artifact | What was recorded |
+|----------|-------------------|
+| [ProductVision.md](../governance/ProductVision.md) | Multi-channel intent; persona channel hypotheses |
+| [ADR-030](../governance/ArchitectureDecisionLog.md) | API-first, thin clients |
+| [Questions.md](../governance/Questions.md) | Q-090–Q-093 (parity, journeys, offline, tech choice) |
+| [Requirements.md](Requirements.md) | NFR-100 multi-client support |
+| [Risks.md](../governance/Risks.md) | RISK-090 parity scope creep |
+
+**Deferred until Phase 1:** client framework selection (Q-093), wireframes per channel, mobile-specific Security (push, secure storage, cert pinning).
+
+**Working hypothesis:** Web-first MVP; mobile reviewer subset unless Q-090 resolves otherwise.
 
 ---
 
@@ -227,6 +247,10 @@ flowchart LR
 - **Q-050:** Retention defaults vs. customer policy vs. regulatory minimums—who wins?
 - **Q-060:** What assertion types are in scope (pass/fail, qualified, risk rating, free text)?
 - **Q-070:** Integration strategy: replace GRC vs. complement via exports/API?
+- **Q-090:** Web and mobile: full parity or role-based channel scope?
+- **Q-091:** Which v1 journeys must work on mobile?
+- **Q-092:** Is offline mobile required for reviewers?
+- **Q-093:** Native apps vs responsive web vs hybrid—when to decide?
 
 ### [Risks.md](../governance/Risks.md) — initial RISK-010 block
 
@@ -237,6 +261,7 @@ flowchart LR
 - **RISK-050 Regulatory:** Data residency / cross-border transfer constraints limit SaaS model
 - **RISK-060 Product:** Scope explosion across regulations before beachhead validation
 - **RISK-070 Technical:** Immutability vs. GDPR rectification/erasure tension (additive corrections model must be designed early)
+- **RISK-090 Product:** Multi-channel feature parity scope creep before beachhead validation
 
 ---
 
@@ -274,6 +299,7 @@ flowchart TD
 | Wave 2 — Problem and domain | Draft — awaiting **Agreed** |
 | Wave 3 — ADR-010 | Accepted |
 | Wave 3 — ADR-020 (AuditorsVault separation) | Accepted |
-| Wave 4 — Requirements | Draft |
+| Wave 3 — ADR-030 (multi-client architecture) | Accepted |
+| Wave 4 — Requirements | Draft (includes NFR-100) |
 
 No [src/](../src/) code, no API specs, no wireframes until Problem + Domain Model reach **Agreed**.

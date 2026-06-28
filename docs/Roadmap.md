@@ -23,10 +23,11 @@ Phased outcomes for TrustRegistry—not a feature laundry list or committed time
 - [x] Domain Model (Draft)
 - [x] ADR-010 Evidence package boundary
 - [x] ADR-020 TrustRegistry / AuditorsVault separation
-- [x] Requirements NFRs + core FRs (Draft)
+- [x] ADR-030 Multi-client architecture (web + mobile)
+- [x] Requirements NFRs + core FRs (Draft, includes NFR-100)
 - [ ] **Gate:** Waves 1–3 documents reach **Agreed**
 
-**Exit criteria:** Stakeholder agreement on principles, vision, problem, domain model, and ADR-010/ADR-020. Q-010 beachhead validated or explicitly chosen.
+**Exit criteria:** Stakeholder agreement on principles, vision, problem, domain model, and ADR-010/ADR-020/ADR-030. Q-010 beachhead validated or explicitly chosen.
 
 ---
 
@@ -36,23 +37,25 @@ Phased outcomes for TrustRegistry—not a feature laundry list or committed time
 
 **Deliverables:**
 
-- Architecture document (tenant model, package lifecycle, integrity proof approach)
+- Architecture document (tenant model, package lifecycle, integrity proof approach, **multi-client API boundary per ADR-030**)
 - AuditorsVault integration boundary (resolve Q-080)
-- Security document (isolation, auth, audit, disclosure authorisation)
-- API outline (package, disclosure, assertion operations)
-- User journeys for custodian publish/disclose and reviewer assert flows
-- Wireframes for critical paths only
-- Resolve Q-030 (review mechanism), Q-060 (assertion types), Q-040 (residency) as needed for design
+- Security document (isolation, auth, audit, disclosure authorisation; **mobile: push, secure storage, device auth—per Q-092, Q-093**)
+- API outline (package, disclosure, assertion operations)—**canonical contract for web and mobile**
+- User journeys for custodian publish/disclose and reviewer assert flows—**note primary channel per journey (Q-090, Q-091)**
+- Wireframes for critical paths only—**web first unless Q-090 resolves mobile-critical**
+- Resolve Q-030 (review mechanism), Q-060 (assertion types), Q-040 (residency), **Q-090–Q-093 (channel scope)** as needed for design
 
 **Exit criteria:** Architecture, Security, API, and core UI journeys **Agreed**.
 
-**Non-goals:** Full GRC feature parity, all publishing providers, all verticals, AuditorsVault feature parity inside TrustRegistry.
+**Non-goals:** Full GRC feature parity, all publishing providers, all verticals, AuditorsVault feature parity inside TrustRegistry, **full web/mobile feature parity in v1**.
 
 ---
 
 ## Phase 2 — Implementation MVP
 
 **Outcome:** Working multi-tenant SaaS demonstrating core trust mechanics for beachhead use case.
+
+**Channel strategy (hypothesis — Q-090):** **Web-first** client implementing full MVP flows. Mobile client deferred unless Q-091 identifies mobile-critical launch journeys.
 
 **Minimum capabilities:**
 
@@ -62,7 +65,7 @@ Phased outcomes for TrustRegistry—not a feature laundry list or committed time
 4. Both: view attributed assertions without platform verdict
 5. Custodian: export package with proofs
 
-**Optional for MVP:** External anchoring (FR-100); AuditorsVault integration (FR-D050)—integrity proof alone satisfies FP-020.
+**Optional for MVP:** External anchoring (FR-100); AuditorsVault integration (FR-D050); mobile client (FR-D060)—integrity proof alone satisfies FP-020.
 
 **Exit criteria:** End-to-end demo with real beachhead scenario; NFR-010, NFR-040, NFR-060 demonstrated.
 
@@ -94,6 +97,7 @@ Phased outcomes for TrustRegistry—not a feature laundry list or committed time
 - Regional residency deployments (Q-040)
 - Approval workflows (ApprovalModel)
 - Subset disclosure (FR-D030)
+- Mobile application (FR-D060) after web MVP and Q-090–Q-093 resolved
 
 **Gate:** Each expansion checked against FP-090 and RISK-060.
 
@@ -109,6 +113,7 @@ flowchart TD
   P3[Phase3_BeachheadValidation]
   P4[Phase4_Expand]
   AV[AuditorsVault_separate_repo]
+  Mobile[Mobile_client_optional]
 
   P0 -->|Agreed docs| P1
   P1 -->|Agreed architecture| P2
@@ -116,6 +121,7 @@ flowchart TD
   P3 -->|Validated beachhead| P4
   AV -.->|optional infra Q-080| P2
   AV -.->|optional infra Q-080| P4
+  Mobile -.->|after web MVP Q-090| P4
 ```
 
 ---
@@ -134,4 +140,4 @@ flowchart TD
 - [ProductVision.md](../governance/ProductVision.md) — success signals
 - [Requirements.md](Requirements.md) — FR/NFR detail
 - [Questions.md](../governance/Questions.md) — open decisions blocking phases
-- [ArchitectureDecisionLog.md](../governance/ArchitectureDecisionLog.md) — ADR-020
+- [ArchitectureDecisionLog.md](../governance/ArchitectureDecisionLog.md) — ADR-020, ADR-030

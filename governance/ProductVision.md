@@ -27,6 +27,19 @@ Blockchain, when implemented, is an **interchangeable publishing provider** for 
 
 ---
 
+## Multi-channel product (web and mobile)
+
+TrustRegistry is a **multi-channel product** available as a **web application** and a **mobile application**.
+
+- Web and mobile are **peer clients** on the same trust domain—they do not define business rules.
+- The **platform API is canonical**; clients are thin presentation and interaction layers (ADR-030).
+- **Full feature parity across channels is not assumed for v1** (FP-090). Channel scope is role- and journey-based until Q-090–Q-093 are resolved.
+- Integrity proofs, trust assertions, disclosure, and audit events remain **server-side** regardless of client (NFR-040, NFR-100).
+
+**Working hypothesis (Q-090):** Web is primary for custodian and admin workflows; mobile may lead for reviewer notification, package review, and assertion capture—subject to beachhead validation.
+
+---
+
 ## Related products
 
 ### AuditorsVault (separate product)
@@ -78,14 +91,14 @@ We lose if v1 resembles "another compliance dashboard" optimised for a single or
 
 ## Personas
 
-| Persona | Role | Primary need |
-|---------|------|--------------|
-| **Evidence Custodian** | Compliance owner, risk manager, or delegate who assembles and maintains evidence | Assemble packages, control disclosure, preserve history |
-| **Subject Entity** | Organisation or party the evidence concerns (may overlap with custodian) | Represented in packages, not necessarily a direct user |
-| **Reviewer** | External auditor, regulator, partner, or due-diligence team | Access disclosed packages, record trust assertions |
-| **Platform Administrator** | Tenant admin | User access, policy, retention configuration |
+| Persona | Role | Primary need | Likely primary channel (hypothesis) |
+|---------|------|--------------|-------------------------------------|
+| **Evidence Custodian** | Compliance owner, risk manager, or delegate who assembles and maintains evidence | Assemble packages, control disclosure, preserve history | Web |
+| **Subject Entity** | Organisation or party the evidence concerns (may overlap with custodian) | Represented in packages, not necessarily a direct user | — |
+| **Reviewer** | External auditor, regulator, partner, or due-diligence team | Access disclosed packages, record trust assertions | Web and/or mobile (Q-090, Q-091) |
+| **Platform Administrator** | Tenant admin | User access, policy, retention configuration | Web |
 
-Buyers are typically **custodian organisations**. Reviewers may or may not be TrustRegistry tenants (see Q-030).
+Buyers are typically **custodian organisations**. Reviewers may or may not be TrustRegistry tenants (see Q-030). Channel assignment is hypothesis until user research and Q-090–Q-093 are resolved.
 
 ---
 
@@ -112,9 +125,10 @@ These indicate the vision is working—not vanity metrics:
 | Immutable, additive history | FP-060 |
 | Focused beachhead | FP-090 |
 | Export and portability | FP-080 |
+| Multi-channel (web + mobile) | ADR-030, NFR-100 |
 
 ---
 
 ## Open questions affecting vision
 
-See [Questions.md](Questions.md): Q-010 (beachhead), Q-030 (review mechanism), Q-070 (GRC positioning), Q-080 (AuditorsVault integration).
+See [Questions.md](Questions.md): Q-010 (beachhead), Q-030 (review mechanism), Q-070 (GRC positioning), Q-080 (AuditorsVault integration), Q-090–Q-093 (web/mobile scope and parity).

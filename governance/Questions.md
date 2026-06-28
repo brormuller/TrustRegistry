@@ -112,6 +112,60 @@ This register records uncertainties we refuse to assume. When a question is answ
 
 ---
 
+### Q-090 — Web and mobile feature parity
+
+**Question:** Should web and mobile offer **full feature parity**, or **role-based channel scope** (e.g. custodians on web, reviewers on mobile)?
+
+**Context:** Multi-channel intent is recorded in Product Vision and ADR-030. Full parity on both channels for v1 risks scope explosion (RISK-090, FP-090).
+
+**Impact:** Roadmap, Phase 2 MVP scope, resourcing.
+
+**Status:** Open  
+**Hypothesis:** Web-first MVP with full custodian and reviewer flows; mobile expands with reviewer-focused subset unless beachhead proves otherwise.
+
+**Related:** Q-091, ADR-030
+
+---
+
+### Q-091 — Mobile-critical v1 journeys
+
+**Question:** Which user journeys **must** work on mobile at launch (e.g. disclosure notifications, package review, integrity verification, assertion capture)?
+
+**Context:** Not all personas need mobile on day one. Defining mobile-critical journeys avoids building two full apps.
+
+**Impact:** User journeys, wireframes, Phase 2 implementation order.
+
+**Status:** Open  
+**Related:** Q-090, Q-092
+
+---
+
+### Q-092 — Offline mobile support
+
+**Question:** Is **offline mobile** access required for reviewers—e.g. read exported package or cached disclosure without network connectivity?
+
+**Context:** Offline affects sync model, local secure storage, and Security architecture. NFR-060 export may satisfy some offline needs without full offline app.
+
+**Impact:** Architecture, Security, mobile implementation complexity.
+
+**Status:** Open  
+**Related:** Q-091, NFR-060
+
+---
+
+### Q-093 — Mobile implementation approach
+
+**Question:** When do we decide native apps vs responsive web vs hybrid—and what criteria govern the choice?
+
+**Context:** ADR-030 commits to API-first multi-client architecture but deliberately defers client technology selection until journeys and Q-090–Q-092 are clearer.
+
+**Impact:** Architecture, staffing, app store strategy, Phase 2+ timeline.
+
+**Status:** Open  
+**Related:** ADR-030, Phase 1 Security (push notifications, secure storage)
+
+---
+
 ## Answered questions
 
 ### Q-000 — Product name and separation from AuditorsVault

@@ -4,6 +4,8 @@
 
 TrustRegistry is a regulated-industry trust platform that enables organisations to assemble, preserve, and selectively disclose integrity-proven evidence packages—so regulators, auditors, and partners can independently review the same material and record their own trust assertions, without the platform declaring truth.
 
+Available as a **web application** and **mobile application**—peer clients on a single platform API ([ADR-030](governance/ArchitectureDecisionLog.md)).
+
 ## Related products
 
 **AuditorsVault** is a separate product: PostgreSQL-native temporal audit infrastructure for reconstructable, tamper-evident database history. TrustRegistry may consume AuditorsVault as an implementation component for immutable history (FP-060), but the products have distinct repositories, visions, and buyers. See [governance/ArchitectureDecisionLog.md](governance/ArchitectureDecisionLog.md) ADR-020.

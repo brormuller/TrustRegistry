@@ -14,6 +14,7 @@ Record of significant architecture and design decisions. Each ADR is immutable o
 |----|-------|--------|------|
 | ADR-010 | Evidence package as unit of disclosure and review | Accepted | 2026-06-28 |
 | ADR-020 | TrustRegistry and AuditorsVault as separate products | Accepted | 2026-06-28 |
+| ADR-030 | Multi-client architecture — API-first, thin clients | Accepted | 2026-06-28 |
 
 ---
 
@@ -122,6 +123,67 @@ Merging them into one product or one repository would:
 - [ProductVision.md](ProductVision.md) — Related products
 - [Questions.md](Questions.md) — Q-000 (answered), Q-080
 - [Risks.md](Risks.md) — RISK-080
+
+---
+
+## ADR-030 — Multi-client architecture (API-first, thin clients)
+
+**Status:** Accepted  
+**Date:** 2026-06-28  
+**Deciders:** Product architecture
+
+### Context
+
+TrustRegistry is intended as both a **web application** and a **mobile application**. Without an explicit client architecture decision, teams typically:
+
+1. Embed business rules in the first client built (usually web)—forcing mobile to catch up or diverge.
+2. Build channel-specific APIs—breaking NFR-040 (integrity verifiable outside UI) and FP-050 (consistent assertion attribution).
+3. Commit to full feature parity on both channels before journeys are validated—inflating v1 scope (RISK-090, FP-090).
+
+NFR-040 already requires integrity proofs verifiable independently of any UI. ADR-010 defines the server-side boundary object (evidence package). A client architecture decision completes the picture before Phase 1 API design.
+
+### Decision
+
+- TrustRegistry exposes a **single canonical platform API** consumed by **peer clients** (web, mobile, and future channels).
+- **Clients are thin:** presentation, input validation for UX, and session handling only. They do not implement trust logic, integrity computation, disclosure authorisation, or assertion semantics.
+- **Business rules live server-side:** package publication, disclosure, integrity proofs, trust assertions, and audit logging are API responsibilities.
+- **No client-specific server behaviour** unless justified by a future ADR (e.g. mobile push registration is an capability, not a fork of domain rules).
+- **Channel scope is product-defined, not parity-assumed:** web and mobile may ship different journey subsets in v1 per Q-090–Q-093; the API supports all agreed capabilities regardless of which client exposes them first.
+
+### Consequences
+
+**Positive:**
+
+- Aligns with NFR-040, FP-010, FP-050, FP-080
+- Web-first MVP (Phase 2) does not block mobile later
+- Security model centralised: auth, authorisation, audit at API layer
+- API.md becomes the contract both clients implement against
+
+**Negative / trade-offs:**
+
+- API design must be complete enough for mobile constraints (pagination, partial reads, file upload patterns) even if mobile ships later
+- Mobile-specific concerns (push, biometrics, secure enclave, offline—Q-092) must be addressed in Security and Architecture, not bolted on
+- Requires discipline to resist "just this once" logic in web frontend
+
+**Open:**
+
+- Q-090: parity vs role-based channel scope
+- Q-091: mobile-critical journeys
+- Q-092: offline mobile
+- Q-093: native vs hybrid vs responsive web
+
+**Deferred (Phase 1):**
+
+- Client technology stack selection
+- Wireframes per channel
+- Push notification provider
+
+### Related
+
+- [ProductVision.md](ProductVision.md) — Multi-channel product
+- [Requirements.md](../docs/Requirements.md) — NFR-100
+- [Questions.md](Questions.md) — Q-090–Q-093
+- [Risks.md](Risks.md) — RISK-090
 
 ---
 

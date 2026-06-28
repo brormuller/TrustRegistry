@@ -122,6 +122,20 @@ This register tracks commercial, legal, technical, and product risks. Each risk 
 
 ---
 
+### RISK-090 — Multi-channel feature parity scope creep
+
+**Category:** Product  
+**Description:** Commitment to full web and mobile feature parity in v1 doubles UI and QA surface area before beachhead validation.
+
+**Likelihood:** High  
+**Impact:** High  
+**Mitigation:** ADR-030; Q-090–Q-093; web-first MVP hypothesis; role-based channel scope; FP-090.
+
+**Status:** Active  
+**Related:** Q-090, Q-091, [ProductVision.md](ProductVision.md)
+
+---
+
 ## Closed risks
 
 _None yet._
