@@ -14,7 +14,7 @@ Phased outcomes for TrustRegistry—not a feature laundry list or committed time
 
 **Deliverables:**
 
-- [x] Repository at `C:\GitHub\TrustRegistry`
+- [x] Repository at `C:\GitHub\TrustRegistry` ([github.com/brormuller/TrustRegistry](https://github.com/brormuller/TrustRegistry))
 - [x] Platform Principles (Draft)
 - [x] Product Vision (Draft)
 - [x] Terminology (Draft)

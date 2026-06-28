@@ -118,7 +118,7 @@ This register records uncertainties we refuse to assume. When a question is answ
 
 **Question:** Is the regulated trust platform the same product as AuditorsVault?
 
-**Answer:** No. TrustRegistry is the regulated trust platform (this repo). AuditorsVault remains the PostgreSQL database history tool (separate repo). TrustRegistry may consume AuditorsVault as infrastructure.
+**Answer:** No. TrustRegistry is the regulated trust platform (this repo). AuditorsVault remains the PostgreSQL database history tool ([AuditorsVault/site](https://github.com/AuditorsVault/site)). TrustRegistry may consume AuditorsVault as infrastructure. Both are peer top-level GitHub repositories.
 
 **Resolved by:** ADR-020  
 **Date:** 2026-06-28
