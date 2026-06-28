@@ -122,9 +122,3 @@ This register records uncertainties we refuse to assume. When a question is answ
 
 **Resolved by:** ADR-020  
 **Date:** 2026-06-28
-
----
-
-## Answered questions (historical)
-
-_None beyond Q-000._
